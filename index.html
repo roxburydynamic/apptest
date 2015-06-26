@@ -1,9 +1,43 @@
 <!doctype html>
 <html>
 <head>
-<title>Cached image test</title>
+<title>Cache from Web</title>
+<script src='jquery.js'></script>
+<script>
+$(document).ready( function() {
+  mydata=localStorage.getItem("mydata");
+  $("#data").html(mydata);
+
+  checknewdata();
+
+  
+
+});
+
+var mydata="";
+
+function checknewdata() {
+
+  url="http://81.109.211.195/appdev/webcache/data.txt"
+
+  $.ajax({
+    url: url, 
+    success:function(data) {
+      localStorage.setItem("mydata",data);      
+      mydata=data;
+      $("#data").html(mydata);
+    }
+  });
+
+
+}
+
+
+
+</script>
 </head>
-<body style='background: green;'>
-<img src='http://www.themagictrick.net/hat_logo.png' alt='logo'>
+<body>
+Data from local storage:
+<div id=data style='border: 1px solid silver; padding:5px;'></div>
 </body>
 </html>
